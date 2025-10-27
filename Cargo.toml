@@ -1,9 +1,16 @@
 [package]
 name = "avo-core"
-version.workspace = true
-edition.workspace = true
-authors.workspace = true
-license.workspace = true
+version = "0.1.0"
+edition = "2021"
+authors = ["AVO Protocol Team"]
+license = "MIT"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["AVO Protocol Team"]
+license = "MIT"
+
 
 [build-dependencies]
 chrono = "0.4"
