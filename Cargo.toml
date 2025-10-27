@@ -92,7 +92,7 @@ reqwest = { version = "0.12", features = ["json"] }
 socket2 = { version = "0.5", features = ["all"] }
 
 # Ethereum L1 Integration
-ethers = { version = "2.0", features = ["abigen", "contract", "providers", "signers"] }
+ethers = { version = "2.0", features = ["abigen", "providers", "signers"] }
 
 # Database
 rocksdb = "0.22"
