@@ -1,0 +1,152 @@
+[package]
+name = "avo-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[build-dependencies]
+chrono = "0.4"
+
+[dependencies]
+# Core dependencies
+serde = { workspace = true }
+serde_json = { workspace = true }
+bincode = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+async-trait = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+futures = { workspace = true }
+
+# System utilities
+num_cpus = "1.16"
+rayon = "1.8"
+toml = "0.8"
+
+# Cryptography
+ed25519-dalek = { workspace = true }
+sha3 = { workspace = true }
+blake3 = { workspace = true }
+bls12_381 = { workspace = true }
+group = { workspace = true }
+pairing = { workspace = true }
+threshold_crypto = { workspace = true }
+rand = { workspace = true }
+
+# ZK-SNARKs for real circuit implementation
+ark-std = "0.4"
+ark-ff = "0.4"
+ark-ec = "0.4"
+ark-poly = "0.4"
+ark-poly-commit = "0.4"
+ark-serialize = "0.4"
+ark-relations = "0.4"
+ark-r1cs-std = "0.4"
+ark-groth16 = "0.4"
+ark-bls12-381 = "0.4"
+ark-snark = "0.4"
+ark-bn254 = "0.4"
+bellman = "0.14"
+
+# Networking
+libp2p = { workspace = true }
+hyper = { version = "0.14", features = ["full"] }
+tokio-tungstenite = "0.21"
+reqwest = { version = "0.12", features = ["json"] }
+
+# Database
+rocksdb = { workspace = true }
+
+# Configuration
+config = "0.14"
+
+# Metrics and monitoring
+prometheus = "0.13"
+
+# Serialization
+hex = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# Utility
+lazy_static = "1.4"
+
+# Testing (dev-dependencies would be better, but for simplicity)
+proptest = { version = "1.4", optional = true }
+
+[features]
+default = []
+testing = ["proptest"]
+
+[lib]
+name = "avo_core"
+path = "src/lib.rs"
+
+[[example]]
+name = "simple_zk_demo"
+path = "examples/simple_zk_demo.rs"
+
+[[example]]
+name = "final_zk_demo"
+path = "examples/final_zk_demo.rs"
+
+[[example]]
+name = "working_zk_demo"
+path = "examples/working_zk_demo.rs"
+
+[[example]]
+name = "real_zk_crypto_demo"
+path = "examples/real_zk_crypto_demo.rs"
+
+[[example]]
+name = "performance_demo"
+path = "examples/performance_demo.rs"
+
+[[example]]
+name = "comprehensive_integration_test"
+path = "examples/comprehensive_integration_test.rs"
+
+[[example]]
+name = "comprehensive_vm_test_suite"
+path = "examples/comprehensive_vm_test_suite.rs"
+
+[[example]]
+name = "governance_basic_demo"
+path = "examples/governance_basic_demo.rs"
+
+[[example]]
+name = "governance_complete_demo"
+path = "examples/governance_complete_demo.rs"
+
+[[example]]
+name = "governance_comprehensive_example"
+path = "examples/governance_comprehensive_example.rs"
+
+[[example]]
+name = "governance_comprehensive_new"
+path = "examples/governance_comprehensive_new.rs"
+
+[[example]]
+name = "governance_example"
+path = "examples/governance_example.rs"
+
+[[example]]
+name = "governance_final_demo"
+path = "examples/governance_final_demo.rs"
+
+[[example]]
+name = "governance_real_demo"
+path = "examples/governance_real_demo.rs"
+
+[[example]]
+name = "governance_working_demo"
+path = "examples/governance_working_demo.rs"
+
+[[example]]
+name = "vm_smart_contracts"
+path = "examples/vm_smart_contracts.rs"

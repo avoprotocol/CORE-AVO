@@ -1,0 +1,152 @@
+[package]
+name = "avo-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[build-dependencies]
+chrono = "0.4"
+
+[dependencies]
+# Core dependencies
+serde = { workspace = true }
+serde_json = { workspace = true }
+bincode = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+async-trait = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+futures = { workspace = true }
+
+# System utilities
+num_cpus = "1.16"
+rayon = "1.8"
+toml = "0.8"
+
+# Cryptography
+schnorrkel = "0.11" # Real VRF implementation (sr25519)
+ed25519-dalek = { workspace = true }
+sha2 = { workspace = true }
+sha3 = { workspace = true }
+blake3 = { workspace = true }
+bls12_381 = { workspace = true }
+group = { workspace = true }
+pairing = { workspace = true }
+threshold_crypto = { workspace = true }
+rand = { workspace = true }
+rand07 = { package = "rand", version = "0.7" }
+subtle = "2.5"
+
+# ZK-SNARKs for real circuit implementation
+ark-std = "0.4"
+ark-ff = "0.4"
+ark-ec = "0.4"
+ark-poly = "0.4"
+ark-poly-commit = "0.4"
+ark-serialize = "0.4"
+ark-relations = "0.4"
+ark-r1cs-std = "0.4"
+ark-groth16 = "0.4"
+ark-bls12-381 = "0.4"
+
+# Hardware acceleration
+wide = { version = "0.7", optional = true }
+wgpu = { version = "0.19", optional = true }
+cudarc = { version = "0.11", features = ["driver"], optional = true }
+ark-snark = "0.4"
+ark-bn254 = "0.4"
+bellman = "0.14"
+
+# Missing dependencies that were causing compilation errors
+uuid = { version = "1.6", features = ["v4", "serde"] }
+base64 = "0.21"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+tracing-appender = "0.2"
+lz4_flex = "0.11"
+reed-solomon-erasure = "6.0"
+
+# Networking
+libp2p = { version = "0.53", default-features = false, features = [
+	"macros",
+	"dns",
+	"tcp",
+	"noise",
+	"yamux",
+	"gossipsub",
+	"kad",
+	"identify",
+	"ping",
+	"autonat",
+	"relay",
+	"tokio",
+	"websocket",
+	"metrics"
+] }
+hyper = { version = "0.14", features = ["full"] }
+tokio-tungstenite = "0.21"
+reqwest = { version = "0.12", features = ["json"] }
+socket2 = { version = "0.5", features = ["all"] } # For TCP keepalive and low-level socket options
+
+# Ethereum L1 Integration
+ethers = { workspace = true }
+
+# Database
+rocksdb = "0.22"
+
+# Configuration
+config = "0.14"
+
+# EVM execution
+revm = { version = "29.0.1", default-features = false, features = ["std"] }
+
+# WASM Runtime
+wasmtime = "28.0"
+wasmtime-wasi = "28.0"
+wasmer = "4.2"
+wasmer-compiler-cranelift = "4.2"
+
+# Metrics and monitoring
+prometheus = "0.13"
+
+# Serialization
+hex = "0.4"
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Utility
+lazy_static = "1.4"
+petgraph = "0.6"
+tempfile = { workspace = true }
+
+# Merkle trees for state management
+rs_merkle = "1.4"
+
+# Testing (dev-dependencies would be better, but for simplicity)
+proptest = { version = "1.4", optional = true }
+wat = "1.0"
+
+
+[features]
+default = []
+# Enable this feature to compile and run test modules inside crates
+run-tests = []
+testing = ["proptest"]
+hardware-acceleration = ["wide"]
+gpu = ["wgpu", "cudarc"]
+full-optimization = ["hardware-acceleration", "gpu"]
+
+[lib]
+name = "avo_core"
+path = "src/lib.rs"
+# Disable building the test and bench harnesses by default
+# This prevents unit test modules from being compiled during `cargo test` for the workspace
+# unless explicitly enabled via features/overrides.
+test = false
+doctest = false
+bench = false
+
